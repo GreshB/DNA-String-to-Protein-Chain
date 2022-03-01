@@ -128,5 +128,5 @@ def dna_to_amino_acid_chain(dna):
 
 if __name__ == '__main__':
     dna = sys.argv[1]
-    dna_to_amino_acid_chain(dna)
-   
+    result = dna_to_amino_acid_chain(dna)
+    print(result)
