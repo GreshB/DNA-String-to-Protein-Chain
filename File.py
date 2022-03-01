@@ -125,3 +125,8 @@ def dna_to_amino_acid_chain(dna):
             dashlist.append(trans3[i])
 
     return "".join(dashlist)
+
+if __name__ == '__main__':
+    dna = sys.argv[1]
+    dna_to_amino_acid_chain(dna)
+   
