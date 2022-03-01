@@ -5,4 +5,4 @@ that won't be able to create a protein chain is inputted, a message is printed t
 is also produced along side it. It doesn't damage the program, or change how it would normally operate, just a minor
 graphical annoyance
 
-To start run `python file.py` and enter `DNA_to_amino_acid_chain('your selected dna sequence')`
+To start run `python file.py`
