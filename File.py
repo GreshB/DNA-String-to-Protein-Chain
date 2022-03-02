@@ -2,16 +2,18 @@ def transcription1(dna):
     string = ''
     trans1 = []
     lcdna = dna.lower()
-    for i in range(len(dna)):
-        if lcdna[i] == 'c':
-            trans1.append('g')
-        if lcdna[i] == 't':
-            trans1.append('a')
-        if lcdna[i] == 'a':
-            trans1.append('t')
-        if lcdna[i] == 'g':
-            trans1.append('c')
 
+    # try a dictionary to map "key":"value" 
+    transcription_map = { 
+        'c' : 'g',
+        't' : 'a',
+        'a' : 't',
+        'g' : 'c',
+    }
+
+    for i in range(len(dna)):
+        # todo: what happens if the key at lcdna[i] is not in the lookup table? 
+        trans1.append(transcription_map[ lcdna[i] ]
     return string.join(trans1)
 
 def transcription2(dna):
