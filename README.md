@@ -7,3 +7,6 @@ graphical annoyance
 Note: The DNA strand must be 5' to 3', i.e. the coding strand
 
 To start run `python file.py`
+
+
+<img width="350" alt="Screen Shot 2022-03-04 at 12 38 49 AM" src="https://user-images.githubusercontent.com/100721569/156712804-66aa1302-8a5a-471d-af0d-321fe078868f.png">
