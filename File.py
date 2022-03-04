@@ -2,31 +2,28 @@ def transcription1(dna):
     string = ''
     trans1 = []
     lcdna = dna.lower()
+    transcription_map = {
+        'c' : 'g',
+        't' : 'a',
+        'a' : 't',
+        'g' : 'c',
+    }
     for i in range(len(dna)):
-        if lcdna[i] == 'c':
-            trans1.append('g')
-        if lcdna[i] == 't':
-            trans1.append('a')
-        if lcdna[i] == 'a':
-            trans1.append('t')
-        if lcdna[i] == 'g':
-            trans1.append('c')
-
+        trans1.append(transcription_map[lcdna[i]])
     return string.join(trans1)
 
 def transcription2(dna):
     string = ''
     trans2 = []
     lcdna = transcription1(dna)
-    for i in range(len(lcdna)):
-        if lcdna[i] == 'c':
-            trans2.append('c')
-        if lcdna[i] == 't':
-            trans2.append('u')
-        if lcdna[i] == 'a':
-            trans2.append('a')
-        if lcdna[i] == 'g':
-            trans2.append('g')
+    transcription_map = {
+        'c' : 'g',
+        't' : 'a',
+        'a' : 'u',
+        'g' : 'c',
+    }
+    for i in range(len(dna)):
+        trans2.append(transcription_map[lcdna[i]])
 
     return string.join(trans2)
 
@@ -66,65 +63,110 @@ def find_met(dna):
         return (dna_split_list)
 
 def dna_to_amino_acid_chain(dna):
-    trans3 = []
-    n = 3
-    dna_split_list = find_met(dna)
-    dashlist = []
+    rna_combos = {
+        'aaa': 'Lys',
+        'aac': 'Asn',
+        'aag': 'Lys',
+        'aau': 'Asn',
+        'aca': 'Thr',
+        'acc': 'Thr',
+        'acg': 'Thr',
+        'acu': 'Thr',
+        'aga': 'Arg',
+        'agc': 'Ser',
+        'agg': 'Arg',
+        'agu': 'Ser',
+        'aua': 'Ile',
+        'auc': 'Ile',
+        'aug': 'Met',
+        'auu': 'Ile',
+        'caa': 'Gln',
+        'cac': 'His',
+        'cag': 'Gln',
+        'cau': 'His',
+        'cca': 'Pro',
+        'ccc': 'Pro',
+        'ccg': 'Pro',
+        'ccu': 'Pro',
+        'cga': 'Arg',
+        'cgc': 'Arg',
+        'cgg': 'Arg',
+        'cgu': 'Arg',
+        'cua': 'Leu',
+        'cuc': 'Leu',
+        'cug': 'Leu',
+        'cuu': 'Leu',
+        'gaa': 'Glu',
+        'gac': 'Asp',
+        'gag': 'Glu',
+        'gau': 'Asp',
+        'gca': 'Ala',
+        'gcc': 'Ala',
+        'gcg': 'Ala',
+        'gcu': 'Ala',
+        'gga': 'Gly',
+        'ggc': 'Gly',
+        'ggg': 'Gly',
+        'ggu': 'Gly',
+        'gua': 'Val',
+        'guc': 'Val',
+        'gug': 'Val',
+        'guu': 'Val',
+        'uaa': 'STOP',
+        'uac': 'Tyr',
+        'uag': 'STOP',
+        'uau': 'Tyr',
+        'uga': 'STOP',
+        'ugc': 'Cys',
+        'ugg': 'Trp',
+        'ugu': 'Cys',
+        'uuc': 'Phe',
+        'uug': 'Leu',
+        'uuu': 'Phe'
+    }
 
-    for i in range(len(dna_split_list)):
-        if dna_split_list[i] == "uuc" or dna_split_list[i] == "uuu":
-            trans3.append("Phe")
-        if dna_split_list[i] == "uua" or dna_split_list[i] == "uug" or dna_split_list[i] == "cuu" or dna_split_list[i] == "cuc" or dna_split_list[i] == "cua" or dna_split_list[i] == "cug":
-            trans3.append("Leu")
-        if dna_split_list[i] == "auu" or dna_split_list[i] == "auc" or dna_split_list[i] == "aua":
-            trans3.append("Ile")
-        if dna_split_list[i] == "aug":
-            trans3.append("Met")
-        if dna_split_list[i] == "guu" or dna_split_list[i] == "guc" or dna_split_list[i] == "gua" or dna_split_list[i] == "gug":
-            trans3.append("Val")
-        if dna_split_list[i] == "ucu" or dna_split_list[i] == "ucc" or dna_split_list[i] == "uca" or dna_split_list[i] == "ucg":
-            trans3.append("Ser")
-        if dna_split_list[i] == "ccu" or dna_split_list[i] == "ccc" or dna_split_list[i] == "cca" or dna_split_list[i] == "ccg":
-            trans3.append("Pro")
-        if dna_split_list[i] == "acu" or dna_split_list[i] == "acc" or dna_split_list[i] == "aca" or dna_split_list[i] == "acg":
-            trans3.append("Thr")
-        if dna_split_list[i] == "gcu" or dna_split_list[i] == "gcc" or dna_split_list[i] == "gca" or dna_split_list[i] == "gcg":
-            trans3.append("Ala")
-        if dna_split_list[i] == "uau" or dna_split_list[i] == "uac":
-            trans3.append("Tyr")
-        if dna_split_list[i] == "uaa" or dna_split_list[i] == "uag" or dna_split_list[i] == "uga":
+    trans3 = []
+    trans4 = []
+    n = 3
+    dashlist = []
+    dashlist2 = []
+    dna_split_list = find_met(dna)
+
+    for i in range(0, len(dna_split_list)):
+        if rna_combos[dna_split_list[i]] != "STOP":
+            trans3.append(rna_combos[dna_split_list[i]])
+        else:
             break
-        if dna_split_list[i] == "cau" or dna_split_list[i] == "cac":
-            trans3.append("His")
-        if dna_split_list[i] == "caa" or dna_split_list[i] == "cag":
-            trans3.append("Gln")
-        if dna_split_list[i] == "aau" or dna_split_list[i] == "aac":
-            trans3.append("Asn")
-        if dna_split_list[i] == "aaa" or dna_split_list[i] == "aag":
-            trans3.append("Lys")
-        if dna_split_list[i] == "gau" or dna_split_list[i] == "gac":
-            trans3.append("Asp")
-        if dna_split_list[i] == "gaa" or dna_split_list[i] == "gag":
-            trans3.append("Glu")
-        if dna_split_list[i] == "ugu" or dna_split_list[i] == "ugc":
-            trans3.append("Cys")
-        if dna_split_list[i] == "ugg":
-            trans3.append("Trp")
-        if dna_split_list[i] == "cgu" or dna_split_list[i] == "cgc" or dna_split_list[i] == "cga" or dna_split_list[i] == "cgg" or dna_split_list[i] == "aga" or dna_split_list[i] == "agg":
-            trans3.append("Arg")
-        if dna_split_list[i] == "agu" or dna_split_list[i] == "agc":
-            trans3.append("Ser")
-        if dna_split_list[i] == "ggu" or dna_split_list[i] == "ggc" or dna_split_list[i] == "gga" or dna_split_list[i] == "ggg":
-            trans3.append("Gly")
 
     for i in range(0, len(trans3)):
-        if trans3[i] != trans3[-1]:
+        if i != len(trans3) - 1:
             dashlist.append(trans3[i])
             dashlist.append("-")
         else:
             dashlist.append(trans3[i])
 
-    return "".join(dashlist)
+    for i in range(len(trans3)+1, len(dna_split_list)):
+        if dna_split_list[i] == "aug":
+            trans4.append("Met")
+            for j in range(i+1, len(dna_split_list)):
+                trans4.append(rna_combos[dna_split_list[j]])
+
+    for i in range(len(trans4)):
+        if trans4[i] == "STOP":
+            del trans4[i:]
+
+    for i in range(0, len(trans4)):
+        if i != len(trans4) - 1:
+            dashlist2.append(trans4[i])
+            dashlist2.append("-")
+        else:
+            dashlist2.append(trans4[i])
+
+    if len(dashlist2) != 0:
+        print("First Chain:","".join(dashlist))
+        print("Second Chain:","".join(dashlist2))
+    else:
+        print("Chain:","".join(dashlist))
 
 if __name__ == '__main__':
     dna = sys.argv[1]
