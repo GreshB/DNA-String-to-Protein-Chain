@@ -25,7 +25,12 @@ def transcription2(dna):
     for i in range(len(dna)):
         trans2.append(transcription_map[lcdna[i]])
 
-    return string.join(trans2)
+    trans2_string = string.join(trans2)
+
+    while len(trans2_string) % 3 != 0:
+        trans2_string = trans2_string[:-1]
+
+    return trans2_string
 
 def frame_for_met(dna):
     n = 3
@@ -52,15 +57,26 @@ def find_met(dna):
     dna_list = transcription2(dna)
     dna_split_list = frame_for_met(dna)
     met_first = []
+    if dna_split_list == None:
+        return "None"
     if dna_split_list[0] != "aug":
         for i in range(1, len(dna_split_list)):
             if dna_split_list[i] == "aug":
                 met_first.append(dna_split_list[i])
                 for j in range(i+1, len(dna_split_list)):
                     met_first.append(dna_split_list[j])
-                return (met_first)
     else:
-        return (dna_split_list)
+        return dna_split_list
+
+    if met_first == []:
+        print(dna_split_list)
+        print("\n*******************************************")
+        print("* This sequence will not create a protein *")
+        print("*******************************************\n")
+        return "None"
+
+    return met_first
+
 
 def dna_to_amino_acid_chain(dna):
     rna_combos = {
@@ -76,6 +92,10 @@ def dna_to_amino_acid_chain(dna):
         'agc': 'Ser',
         'agg': 'Arg',
         'agu': 'Ser',
+        'ucu': 'Ser',
+        'ucg': 'Ser',
+        'uca': 'Ser',
+        'ucc': 'Ser',
         'aua': 'Ile',
         'auc': 'Ile',
         'aug': 'Met',
@@ -122,7 +142,9 @@ def dna_to_amino_acid_chain(dna):
         'ugu': 'Cys',
         'uuc': 'Phe',
         'uug': 'Leu',
-        'uuu': 'Phe'
+        'uuu': 'Phe',
+        'uua': 'Leu'
+
     }
 
     trans3 = []
@@ -131,6 +153,12 @@ def dna_to_amino_acid_chain(dna):
     dashlist = []
     dashlist2 = []
     dna_split_list = find_met(dna)
+
+    if dna_split_list == "None":
+        return "Please try another DNA string"
+
+    if len(dna_split_list[-1]) % 3 != 0:
+        dna_split_list = dna_split_list[:-1]
 
     for i in range(0, len(dna_split_list)):
         if rna_combos[dna_split_list[i]] != "STOP":
@@ -151,9 +179,9 @@ def dna_to_amino_acid_chain(dna):
             for j in range(i+1, len(dna_split_list)):
                 trans4.append(rna_combos[dna_split_list[j]])
 
-    for i in range(len(trans4)):
-        if trans4[i] == "STOP":
-            del trans4[i:]
+    if "STOP" in trans4:
+        stop = trans4.index("STOP")
+        del trans4[stop:]
 
     for i in range(0, len(trans4)):
         if i != len(trans4) - 1:
