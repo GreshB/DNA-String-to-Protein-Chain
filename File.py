@@ -155,7 +155,7 @@ def dna_to_amino_acid_chain(dna):
     dna_split_list = find_met(dna)
 
     if dna_split_list == "None":
-        return "Please try another DNA string"
+        return "Please try another DNA sequence"
 
     if len(dna_split_list[-1]) % 3 != 0:
         dna_split_list = dna_split_list[:-1]
