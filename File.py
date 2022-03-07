@@ -8,8 +8,10 @@ def transcription1(dna):
         'a' : 't',
         'g' : 'c',
     }
+    
     for i in range(len(dna)):
         trans1.append(transcription_map[lcdna[i]])
+        
     return string.join(trans1)
 
 def transcription2(dna):
@@ -22,6 +24,7 @@ def transcription2(dna):
         'a' : 'u',
         'g' : 'c',
     }
+    
     for i in range(len(dna)):
         trans2.append(transcription_map[lcdna[i]])
 
@@ -39,6 +42,7 @@ def frame_for_met(dna):
     dna_split_list2 = [dna_list[i:i+n] for i in range(1, len(dna_list), n)]
     dna_split_list3 = [dna_list[i:i+n] for i in range(2, len(dna_list), n)]
     met_first = []
+    
     if "aug" not in dna_split_list:
         if "aug" not in dna_split_list2:
             if "aug" not in dna_split_list3:
@@ -57,8 +61,10 @@ def find_met(dna):
     dna_list = transcription2(dna)
     dna_split_list = frame_for_met(dna)
     met_first = []
+    
     if dna_split_list == None:
         return "None"
+    
     if dna_split_list[0] != "aug":
         for i in range(1, len(dna_split_list)):
             if dna_split_list[i] == "aug":
@@ -76,7 +82,6 @@ def find_met(dna):
         return "None"
 
     return met_first
-
 
 def dna_to_amino_acid_chain(dna):
     rna_combos = {
@@ -144,7 +149,6 @@ def dna_to_amino_acid_chain(dna):
         'uug': 'Leu',
         'uuu': 'Phe',
         'uua': 'Leu'
-
     }
 
     trans3 = []
