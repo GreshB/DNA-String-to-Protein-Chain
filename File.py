@@ -1,4 +1,10 @@
 def transcription1(dna):
+    '''
+    Purpose: To reinact the first stage of DNA transcription with an inputted DNA sequence
+    Parameter(s): DNA: the inputted DNA sequence
+    Return Values: string.join(trans1) a string of the new DNA sequence
+    '''
+
     string = ''
     trans1 = []
     lcdna = dna.lower()
@@ -8,13 +14,18 @@ def transcription1(dna):
         'a' : 't',
         'g' : 'c',
     }
-    
+
     for i in range(len(dna)):
         trans1.append(transcription_map[lcdna[i]])
-        
     return string.join(trans1)
 
 def transcription2(dna):
+    '''
+    Purpose: To reinact the second stage of DNA transcription with an inputted DNA sequence
+    Parameter(s): DNA: the inputted DNA sequence
+    Return Values: trans2_stirng: a string of RNA based on the initial DNA sequence
+    '''
+
     string = ''
     trans2 = []
     lcdna = transcription1(dna)
@@ -24,7 +35,7 @@ def transcription2(dna):
         'a' : 'u',
         'g' : 'c',
     }
-    
+
     for i in range(len(dna)):
         trans2.append(transcription_map[lcdna[i]])
 
@@ -36,13 +47,30 @@ def transcription2(dna):
     return trans2_string
 
 def frame_for_met(dna):
+    '''
+    Purpose: To frame the RNA sequence created from the DNA sequence in such a way
+             that if "aug" is in the string, then a created list that has organized
+             the RNA sequence into codons, ensures that "aug" will be one of its elements
+             will be returned. (Example: "caug" would become ["cau","g"] without framing, 
+             so this function will instead alter it to ["c","aug"])
+    Parameter(s): DNA: the inputted DNA sequence
+    Return Values: dna_split_list: The RNA sequence in list form in which "aug" is an element,
+                                   if "aug" was present in the RNA string, without ever being missaligned
+                   dna_split_list2: The RNA sequence in list form in which "aug" is an element,
+                                  if "aug" was present in the RNA string, but was not in the initial
+                                  list format, due to being missaligned by 1 nucleotide
+                    dna_split_list3: The RNA sequence in list form in which "aug" is an element,
+                                   if "aug" was present in the RNA string, but was not in the initial
+                                   list format, due to being misalligned by 2 nucleotides
+    '''
+
     n = 3
     dna_list = transcription2(dna)
     dna_split_list = [dna_list[i:i+n] for i in range(0, len(dna_list), n)]
     dna_split_list2 = [dna_list[i:i+n] for i in range(1, len(dna_list), n)]
     dna_split_list3 = [dna_list[i:i+n] for i in range(2, len(dna_list), n)]
     met_first = []
-    
+
     if "aug" not in dna_split_list:
         if "aug" not in dna_split_list2:
             if "aug" not in dna_split_list3:
@@ -57,14 +85,21 @@ def frame_for_met(dna):
         return dna_split_list
 
 def find_met(dna):
+    '''
+    Purpose: To limit a list of RNA codons in such a way that "aug" is the first element
+    Parameter(s): DNA: the inputted DNA sequence
+    Return Values: dna_split_list: a list consisting of RNA codons that contain "aug"
+                   "None": returned if "aug" was not in the list
+    '''
+    
     n = 3
     dna_list = transcription2(dna)
     dna_split_list = frame_for_met(dna)
     met_first = []
-    
+
     if dna_split_list == None:
         return "None"
-    
+
     if dna_split_list[0] != "aug":
         for i in range(1, len(dna_split_list)):
             if dna_split_list[i] == "aug":
@@ -84,6 +119,12 @@ def find_met(dna):
     return met_first
 
 def dna_to_amino_acid_chain(dna):
+    '''
+    Purpose: To convert a sequence of DNA into a chain of amino acids forming a protein
+    Parameter(s): DNA: the inputted DNA sequence
+    Return Values: "Please try another DNA sequence": returned if the DNA sequence can not form a protein
+    '''
+
     rna_combos = {
         'aaa': 'Lys',
         'aac': 'Asn',
@@ -199,6 +240,7 @@ def dna_to_amino_acid_chain(dna):
         print("Second Chain:","".join(dashlist2))
     else:
         print("Chain:","".join(dashlist))
+
 
 if __name__ == '__main__':
     dna = sys.argv[1]
