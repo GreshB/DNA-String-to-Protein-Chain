@@ -5,7 +5,7 @@ If a dna strand that won't be able to create a protein chain is inputted, a mess
 
 Note: The DNA strand must be 5' to 3', i.e. the coding strand
 
-To start run `python file.py`
+To start run `python File.py`
 
 <img width="647" alt="Screen Shot 2022-03-06 at 5 44 32 PM" src="https://user-images.githubusercontent.com/100721569/156947470-999d8a7f-bd10-423c-b8ef-3bca271afe52.png">
 
