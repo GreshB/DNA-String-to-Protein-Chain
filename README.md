@@ -16,5 +16,5 @@ All updates since the initial posting of this program:
 - added the ability for two chains to be outputted
 - added aesthetic formating to the outputted chain(s)
 - added descriptions to each function
-- added comments to if statements and loops to describe what their purpose is
+- added comments to if statements and loops to describe what their purposes are
 - formatted the code to be read more easily
