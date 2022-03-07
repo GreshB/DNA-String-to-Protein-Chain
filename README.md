@@ -1,5 +1,5 @@
 # DNA-String-to-Protein-Chain
-Program takes in a sequence of DNA and converts it to up to two protein chain. This program accounts for frame shifts as well. 
+Program takes in a sequence of DNA and converts it to up to two protein chains. This program accounts for frame shifts as well. 
 If a dna strand that won't be able to create a protein chain is inputted, a message is printed to inform the user.
 
 
