@@ -210,9 +210,6 @@ def dna_to_amino_acid_chain(dna):
 
     trans3 = []
     trans4 = []
-    n = 3
-    dashlist = []
-    dashlist2 = []
     dna_split_list = find_met(dna)
 
     # checking to make sure "aug" was in dna_split_list
@@ -232,14 +229,6 @@ def dna_to_amino_acid_chain(dna):
         else:
             break
 
-    # formating the chain to have dashes between the amino acids
-    for i in range(0, len(trans3)):
-        if i != len(trans3) - 1:
-            dashlist.append(trans3[i])
-            dashlist.append("-")
-        else:
-            dashlist.append(trans3[i])
-
     # checking to see if there is another possible chain in dna_split_list,
     # and if there is, creating a new list to produce it
     for i in range(len(trans3)+1, len(dna_split_list)):
@@ -254,22 +243,17 @@ def dna_to_amino_acid_chain(dna):
         stop = trans4.index("STOP")
         del trans4[stop:]
 
-    # formating the second chain to have dashes between the amino acids
-    for i in range(0, len(trans4)):
-        if i != len(trans4) - 1:
-            dashlist2.append(trans4[i])
-            dashlist2.append("-")
-        else:
-            dashlist2.append(trans4[i])
-
     # checking to see if there was a second chain produced, and if so
     # printing an additional line for it
-    if len(dashlist2) != 0:
-        print("First Chain:","".join(dashlist))
-        print("Second Chain:","".join(dashlist2))
+    if len(trans4) != 0:
+        print("First Chain:", format_dash_list(trans3))
+        print("Second Chain:", format_dash_list(trans4))
     else:
-        print("Chain:","".join(dashlist))
+        print("Chain:", format_dash_list(trans3))
 
+
+def format_dash_list(amino_acids):
+    return "-".join(amino_acids)
 
 
 if __name__ == '__main__':
