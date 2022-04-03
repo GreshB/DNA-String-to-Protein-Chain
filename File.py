@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+import sys
+
 def transcription1(dna):
     '''
     Purpose: To reinact the first stage of DNA transcription with an inputted DNA sequence
