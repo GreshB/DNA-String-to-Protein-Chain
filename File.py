@@ -53,6 +53,14 @@ def transcription2(dna):
 
     return trans2_string
 
+
+def split_codons(dna_string, codon_length, start_pos):
+    return [
+        dna_string[i:i+codon_length]
+        for i in range(start_pos, len(dna_string), codon_length)
+    ]
+
+
 def frame_for_met(dna):
     '''
     Purpose: To frame the RNA sequence created from the DNA sequence in such a way
@@ -71,11 +79,11 @@ def frame_for_met(dna):
                                    list format, due to being misalligned by 2 nucleotides
     '''
 
-    n = 3
     dna_list = transcription2(dna)
-    dna_split_list = [dna_list[i:i+n] for i in range(0, len(dna_list), n)]
-    dna_split_list2 = [dna_list[i:i+n] for i in range(1, len(dna_list), n)]
-    dna_split_list3 = [dna_list[i:i+n] for i in range(2, len(dna_list), n)]
+    dna_split_list = split_codons(dna_list, 3, 0)
+    dna_split_list2 = split_codons(dna_list, 3, 1)
+    dna_split_list3 = split_codons(dna_list, 3, 2)
+
     met_first = []
 
     # rearranging the codon list to find an element "aug", if it cannot be found,
