@@ -1,7 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
-
 
 def transcription1(dna):
     '''
@@ -54,6 +53,14 @@ def transcription2(dna):
 
     return trans2_string
 
+
+def split_codons(dna_string, codon_length, start_pos):
+    return [
+        dna_string[i:i+codon_length]
+        for i in range(start_pos, len(dna_string), codon_length)
+    ]
+
+
 def frame_for_met(dna):
     '''
     Purpose: To frame the RNA sequence created from the DNA sequence in such a way
@@ -72,11 +79,11 @@ def frame_for_met(dna):
                                    list format, due to being misalligned by 2 nucleotides
     '''
 
-    n = 3
     dna_list = transcription2(dna)
-    dna_split_list = [dna_list[i:i+n] for i in range(0, len(dna_list), n)]
-    dna_split_list2 = [dna_list[i:i+n] for i in range(1, len(dna_list), n)]
-    dna_split_list3 = [dna_list[i:i+n] for i in range(2, len(dna_list), n)]
+    dna_split_list = split_codons(dna_list, 3, 0)
+    dna_split_list2 = split_codons(dna_list, 3, 1)
+    dna_split_list3 = split_codons(dna_list, 3, 2)
+
     met_first = []
 
     # rearranging the codon list to find an element "aug", if it cannot be found,
@@ -211,9 +218,6 @@ def dna_to_amino_acid_chain(dna):
 
     trans3 = []
     trans4 = []
-    n = 3
-    dashlist = []
-    dashlist2 = []
     dna_split_list = find_met(dna)
 
     # checking to make sure "aug" was in dna_split_list
@@ -233,14 +237,6 @@ def dna_to_amino_acid_chain(dna):
         else:
             break
 
-    # formating the chain to have dashes between the amino acids
-    for i in range(0, len(trans3)):
-        if i != len(trans3) - 1:
-            dashlist.append(trans3[i])
-            dashlist.append("-")
-        else:
-            dashlist.append(trans3[i])
-
     # checking to see if there is another possible chain in dna_split_list,
     # and if there is, creating a new list to produce it
     for i in range(len(trans3)+1, len(dna_split_list)):
@@ -255,22 +251,17 @@ def dna_to_amino_acid_chain(dna):
         stop = trans4.index("STOP")
         del trans4[stop:]
 
-    # formating the second chain to have dashes between the amino acids
-    for i in range(0, len(trans4)):
-        if i != len(trans4) - 1:
-            dashlist2.append(trans4[i])
-            dashlist2.append("-")
-        else:
-            dashlist2.append(trans4[i])
-
     # checking to see if there was a second chain produced, and if so
     # printing an additional line for it
-    if len(dashlist2) != 0:
-        print("First Chain:","".join(dashlist))
-        print("Second Chain:","".join(dashlist2))
+    if len(trans4) != 0:
+        print("First Chain:", format_dash_list(trans3))
+        print("Second Chain:", format_dash_list(trans4))
     else:
-        print("Chain:","".join(dashlist))
+        print("Chain:", format_dash_list(trans3))
 
+
+def format_dash_list(amino_acids):
+    return "-".join(amino_acids)
 
 
 if __name__ == '__main__':

@@ -7,9 +7,24 @@ Note: The DNA strand must be 5' to 3', i.e. the coding strand
 
 To start run `python File.py`
 
-<img width="647" alt="Screen Shot 2022-03-06 at 5 44 32 PM" src="https://user-images.githubusercontent.com/100721569/156947470-999d8a7f-bd10-423c-b8ef-3bca271afe52.png">
+Success Example:
+```
+$ python3 File.py gatgactgtaccaggattacatggtggtcgctaaaggatgcacaatatgcgctaaagtcg
+First Chain: Met-Thr-Val-Pro-Gly-Leu-His-Gly-Gly-Arg
+Second Chain: Met-His-Asn-Met-Arg
+None
+```
 
-<img width="540" alt="Screen Shot 2022-03-06 at 5 48 34 PM" src="https://user-images.githubusercontent.com/100721569/156947622-e77be805-6c2d-4a65-b261-91fe125a3e02.png">
+Failure Example:
+```
+$ python3 File.py atcgcgcgcgcgcgctcgctgctgctcgtgcgtgcg
+
+*******************************************
+* This sequence will not create a protein *
+*******************************************
+
+Please try another DNA sequence
+```
 
 All updates since the initial posting of this program:
 - removed all if statements used to convert the DNA sequence, RNA sequence, and codons, and replaced them with dictionaries
