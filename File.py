@@ -80,27 +80,20 @@ def frame_for_met(dna):
     '''
 
     dna_list = transcription2(dna)
-    dna_split_list = split_codons(dna_list, 3, 0)
-    dna_split_list2 = split_codons(dna_list, 3, 1)
-    dna_split_list3 = split_codons(dna_list, 3, 2)
+    dna_splits = [split_codons(dna_list, 3, x) for x in range(3)]
 
     met_first = []
 
-    # rearranging the codon list to find an element "aug", if it cannot be found,
-    # a message informing the user that a protein will not be produced
-    # as it is not possbile to make "aug" the first codon in the list
-    if "aug" not in dna_split_list:
-        if "aug" not in dna_split_list2:
-            if "aug" not in dna_split_list3:
-                print("\n*******************************************")
-                print("* This sequence will not create a protein *")
-                print("*******************************************\n")
-            else:
-                return dna_split_list3
-        else:
-            return dna_split_list2
-    else:
-        return dna_split_list
+    for split in dna_splits:
+        if "aug" in split:
+            return split
+
+    print("\n*******************************************")
+    print("* This sequence will not create a protein *")
+    print("*******************************************\n")
+
+    return None
+
 
 def find_met(dna):
     '''
