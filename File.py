@@ -260,7 +260,7 @@ def format_dash_list(amino_acids):
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Requires one and only one command line argument")
-        print("Please provide a DNS sequence as a single string containing only g, t, c, and a")
+        print("Please provide a DNA sequence as a single string containing only g, t, c, and a")
         print("Example:")
         print(f"{sys.argv[0]} gatgactgtaccaggattacatggtggtcgctaaaggatgcacaatatgcgctaaagtcg")
         exit(-1)
