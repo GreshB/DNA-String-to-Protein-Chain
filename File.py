@@ -2,21 +2,22 @@
 
 import sys
 
+
 def transcription1(dna):
-    '''
+    """
     Purpose: To reinact the first stage of DNA transcription with an inputted DNA sequence
     Parameter(s): DNA: the inputted DNA sequence
     Return Values: string.join(trans1) a string of the new DNA sequence
-    '''
+    """
 
-    string = ''
+    string = ""
     trans1 = []
     lcdna = dna.lower()
     transcription_map = {
-        'c' : 'g',
-        't' : 'a',
-        'a' : 't',
-        'g' : 'c',
+        "c": "g",
+        "t": "a",
+        "a": "t",
+        "g": "c",
     }
 
     # creates a string that converts the DNA sequenence
@@ -24,21 +25,22 @@ def transcription1(dna):
         trans1.append(transcription_map[lcdna[i]])
     return string.join(trans1)
 
+
 def transcription2(dna):
-    '''
+    """
     Purpose: To reinact the second stage of DNA transcription with an inputted DNA sequence
     Parameter(s): DNA: the inputted DNA sequence
     Return Values: trans2_stirng: a string of RNA based on the initial DNA sequence
-    '''
+    """
 
-    string = ''
+    string = ""
     trans2 = []
     lcdna = transcription1(dna)
     transcription_map = {
-        'c' : 'g',
-        't' : 'a',
-        'a' : 'u',
-        'g' : 'c',
+        "c": "g",
+        "t": "a",
+        "a": "u",
+        "g": "c",
     }
 
     # creates a string that converted the DNA sequence into RNA
@@ -56,13 +58,13 @@ def transcription2(dna):
 
 def split_codons(dna_string, codon_length, start_pos):
     return [
-        dna_string[i:i+codon_length]
+        dna_string[i : i + codon_length]
         for i in range(start_pos, len(dna_string), codon_length)
     ]
 
 
 def frame_for_met(dna):
-    '''
+    """
     Purpose: To frame the RNA sequence created from the DNA sequence in such a way
              that if "aug" is in the string, then a created list that has organized
              the RNA sequence into codons, ensures that "aug" will be one of its elements
@@ -77,7 +79,7 @@ def frame_for_met(dna):
                     dna_split_list3: The RNA sequence in list form in which "aug" is an element,
                                    if "aug" was present in the RNA string, but was not in the initial
                                    list format, due to being misalligned by 2 nucleotides
-    '''
+    """
 
     dna_list = transcription2(dna)
     dna_splits = [split_codons(dna_list, 3, x) for x in range(3)]
@@ -96,13 +98,13 @@ def frame_for_met(dna):
 
 
 def find_met(dna):
-    '''
+    """
     Purpose: To limit a list of RNA codons in such a way that "aug" is the first element
     Parameter(s): DNA: the inputted DNA sequence
     Return Values: dna_split_list: a list consisting of RNA codons that contain "aug"
                    "None": returned if "aug" was not in the list
                    met_first: a list in which "aug" is the first element
-    '''
+    """
 
     n = 3
     dna_list = transcription2(dna)
@@ -110,7 +112,7 @@ def find_met(dna):
     met_first = []
 
     # checking to make sure "aug" was in dna_split_list
-    if dna_split_list == None:
+    if not dna_split_list:
         return "None"
 
     # if the first codon in the codon list is not "aug", it will attempt to produce
@@ -119,14 +121,14 @@ def find_met(dna):
         for i in range(1, len(dna_split_list)):
             if dna_split_list[i] == "aug":
                 met_first.append(dna_split_list[i])
-                for j in range(i+1, len(dna_split_list)):
+                for j in range(i + 1, len(dna_split_list)):
                     met_first.append(dna_split_list[j])
     else:
         return dna_split_list
 
     # a message informing the user that a protein will not be produced
     # as it is not possbile to make "aug" the first codon in the list
-    if met_first == []:
+    if not met_first:
         print(dna_split_list)
         print("\n*******************************************")
         print("* This sequence will not create a protein *")
@@ -135,78 +137,79 @@ def find_met(dna):
 
     return met_first
 
+
 def dna_to_amino_acid_chain(dna):
-    '''
+    """
     Purpose: To convert a sequence of DNA into a chain of amino acids forming a protein
     Parameter(s): DNA: the inputted DNA sequence
     Return Values: "Please try another DNA sequence": returned if the DNA sequence can not form a protein
-    '''
+    """
 
     rna_combos = {
-        'aaa': 'Lys',
-        'aac': 'Asn',
-        'aag': 'Lys',
-        'aau': 'Asn',
-        'aca': 'Thr',
-        'acc': 'Thr',
-        'acg': 'Thr',
-        'acu': 'Thr',
-        'aga': 'Arg',
-        'agc': 'Ser',
-        'agg': 'Arg',
-        'agu': 'Ser',
-        'ucu': 'Ser',
-        'ucg': 'Ser',
-        'uca': 'Ser',
-        'ucc': 'Ser',
-        'aua': 'Ile',
-        'auc': 'Ile',
-        'aug': 'Met',
-        'auu': 'Ile',
-        'caa': 'Gln',
-        'cac': 'His',
-        'cag': 'Gln',
-        'cau': 'His',
-        'cca': 'Pro',
-        'ccc': 'Pro',
-        'ccg': 'Pro',
-        'ccu': 'Pro',
-        'cga': 'Arg',
-        'cgc': 'Arg',
-        'cgg': 'Arg',
-        'cgu': 'Arg',
-        'cua': 'Leu',
-        'cuc': 'Leu',
-        'cug': 'Leu',
-        'cuu': 'Leu',
-        'gaa': 'Glu',
-        'gac': 'Asp',
-        'gag': 'Glu',
-        'gau': 'Asp',
-        'gca': 'Ala',
-        'gcc': 'Ala',
-        'gcg': 'Ala',
-        'gcu': 'Ala',
-        'gga': 'Gly',
-        'ggc': 'Gly',
-        'ggg': 'Gly',
-        'ggu': 'Gly',
-        'gua': 'Val',
-        'guc': 'Val',
-        'gug': 'Val',
-        'guu': 'Val',
-        'uaa': 'STOP',
-        'uac': 'Tyr',
-        'uag': 'STOP',
-        'uau': 'Tyr',
-        'uga': 'STOP',
-        'ugc': 'Cys',
-        'ugg': 'Trp',
-        'ugu': 'Cys',
-        'uuc': 'Phe',
-        'uug': 'Leu',
-        'uuu': 'Phe',
-        'uua': 'Leu'
+        "aaa": "Lys",
+        "aac": "Asn",
+        "aag": "Lys",
+        "aau": "Asn",
+        "aca": "Thr",
+        "acc": "Thr",
+        "acg": "Thr",
+        "acu": "Thr",
+        "aga": "Arg",
+        "agc": "Ser",
+        "agg": "Arg",
+        "agu": "Ser",
+        "ucu": "Ser",
+        "ucg": "Ser",
+        "uca": "Ser",
+        "ucc": "Ser",
+        "aua": "Ile",
+        "auc": "Ile",
+        "aug": "Met",
+        "auu": "Ile",
+        "caa": "Gln",
+        "cac": "His",
+        "cag": "Gln",
+        "cau": "His",
+        "cca": "Pro",
+        "ccc": "Pro",
+        "ccg": "Pro",
+        "ccu": "Pro",
+        "cga": "Arg",
+        "cgc": "Arg",
+        "cgg": "Arg",
+        "cgu": "Arg",
+        "cua": "Leu",
+        "cuc": "Leu",
+        "cug": "Leu",
+        "cuu": "Leu",
+        "gaa": "Glu",
+        "gac": "Asp",
+        "gag": "Glu",
+        "gau": "Asp",
+        "gca": "Ala",
+        "gcc": "Ala",
+        "gcg": "Ala",
+        "gcu": "Ala",
+        "gga": "Gly",
+        "ggc": "Gly",
+        "ggg": "Gly",
+        "ggu": "Gly",
+        "gua": "Val",
+        "guc": "Val",
+        "gug": "Val",
+        "guu": "Val",
+        "uaa": "STOP",
+        "uac": "Tyr",
+        "uag": "STOP",
+        "uau": "Tyr",
+        "uga": "STOP",
+        "ugc": "Cys",
+        "ugg": "Trp",
+        "ugu": "Cys",
+        "uuc": "Phe",
+        "uug": "Leu",
+        "uuu": "Phe",
+        "uua": "Leu",
     }
 
     trans3 = []
@@ -232,10 +235,10 @@ def dna_to_amino_acid_chain(dna):
 
     # checking to see if there is another possible chain in dna_split_list,
     # and if there is, creating a new list to produce it
-    for i in range(len(trans3)+1, len(dna_split_list)):
+    for i in range(len(trans3) + 1, len(dna_split_list)):
         if dna_split_list[i] == "aug":
             trans4.append("Met")
-            for j in range(i+1, len(dna_split_list)):
+            for j in range(i + 1, len(dna_split_list)):
                 trans4.append(rna_combos[dna_split_list[j]])
 
     # checking to see if there is a STOP codon in the second list, and if so,
