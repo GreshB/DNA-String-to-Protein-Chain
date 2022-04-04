@@ -84,21 +84,16 @@ def frame_for_met(dna):
 
     met_first = []
 
-    # rearranging the codon list to find an element "aug", if it cannot be found,
-    # a message informing the user that a protein will not be produced
-    # as it is not possbile to make "aug" the first codon in the list
-    if "aug" not in dna_splits[0]:
-        if "aug" not in dna_splits[1]:
-            if "aug" not in dna_splits[2]:
-                print("\n*******************************************")
-                print("* This sequence will not create a protein *")
-                print("*******************************************\n")
-            else:
-                return dna_splits[2]
-        else:
-            return dna_splits[1]
-    else:
-        return dna_splits[0]
+    for split in dna_splits:
+        if "aug" in split:
+            return split
+
+    print("\n*******************************************")
+    print("* This sequence will not create a protein *")
+    print("*******************************************\n")
+
+    return None
+
 
 def find_met(dna):
     '''
