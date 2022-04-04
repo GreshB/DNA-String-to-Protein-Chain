@@ -21,3 +21,7 @@ class DNAStringTest(TestCase):
             ['ucg', 'aug', 'acu', 'gua', 'cca', 'gga'],
             frame_for_met("tcgatgactgtaccaggatt")
         )
+        self.assertEqual(
+            None,
+            frame_for_met("aaagttacc")
+        )
