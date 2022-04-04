@@ -260,14 +260,17 @@ def format_dash_list(amino_acids):
     return "-".join(amino_acids)
 
 
-if __name__ == '__main__':
+def main():
     if len(sys.argv) != 2:
         print("Requires one and only one command line argument")
         print("Please provide a DNA sequence as a single string containing only g, t, c, and a")
         print("Example:")
         print(f"{sys.argv[0]} gatgactgtaccaggattacatggtggtcgctaaaggatgcacaatatgcgctaaagtcg")
         exit(-1)
-
     dna = sys.argv[1]
     result = dna_to_amino_acid_chain(dna)
     print(result)
+
+
+if __name__ == "__main__":
+    main()
