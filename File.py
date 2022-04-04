@@ -2,6 +2,8 @@
 
 import sys
 
+from constants import RNA_COMBOS, STAGE_ONE_TRANSCRIPTION_MAP, STAGE_TWO_TRANSCRIPTION_MAP
+
 
 def transcription1(dna):
     """
@@ -13,16 +15,10 @@ def transcription1(dna):
     string = ""
     trans1 = []
     lcdna = dna.lower()
-    transcription_map = {
-        "c": "g",
-        "t": "a",
-        "a": "t",
-        "g": "c",
-    }
 
     # creates a string that converts the DNA sequenence
     for i in range(len(dna)):
-        trans1.append(transcription_map[lcdna[i]])
+        trans1.append(STAGE_ONE_TRANSCRIPTION_MAP[lcdna[i]])
     return string.join(trans1)
 
 
@@ -36,16 +32,10 @@ def transcription2(dna):
     string = ""
     trans2 = []
     lcdna = transcription1(dna)
-    transcription_map = {
-        "c": "g",
-        "t": "a",
-        "a": "u",
-        "g": "c",
-    }
 
     # creates a string that converted the DNA sequence into RNA
     for i in range(len(dna)):
-        trans2.append(transcription_map[lcdna[i]])
+        trans2.append(STAGE_TWO_TRANSCRIPTION_MAP[lcdna[i]])
 
     trans2_string = string.join(trans2)
 
@@ -145,73 +135,6 @@ def dna_to_amino_acid_chain(dna):
     Return Values: "Please try another DNA sequence": returned if the DNA sequence can not form a protein
     """
 
-    rna_combos = {
-        "aaa": "Lys",
-        "aac": "Asn",
-        "aag": "Lys",
-        "aau": "Asn",
-        "aca": "Thr",
-        "acc": "Thr",
-        "acg": "Thr",
-        "acu": "Thr",
-        "aga": "Arg",
-        "agc": "Ser",
-        "agg": "Arg",
-        "agu": "Ser",
-        "ucu": "Ser",
-        "ucg": "Ser",
-        "uca": "Ser",
-        "ucc": "Ser",
-        "aua": "Ile",
-        "auc": "Ile",
-        "aug": "Met",
-        "auu": "Ile",
-        "caa": "Gln",
-        "cac": "His",
-        "cag": "Gln",
-        "cau": "His",
-        "cca": "Pro",
-        "ccc": "Pro",
-        "ccg": "Pro",
-        "ccu": "Pro",
-        "cga": "Arg",
-        "cgc": "Arg",
-        "cgg": "Arg",
-        "cgu": "Arg",
-        "cua": "Leu",
-        "cuc": "Leu",
-        "cug": "Leu",
-        "cuu": "Leu",
-        "gaa": "Glu",
-        "gac": "Asp",
-        "gag": "Glu",
-        "gau": "Asp",
-        "gca": "Ala",
-        "gcc": "Ala",
-        "gcg": "Ala",
-        "gcu": "Ala",
-        "gga": "Gly",
-        "ggc": "Gly",
-        "ggg": "Gly",
-        "ggu": "Gly",
-        "gua": "Val",
-        "guc": "Val",
-        "gug": "Val",
-        "guu": "Val",
-        "uaa": "STOP",
-        "uac": "Tyr",
-        "uag": "STOP",
-        "uau": "Tyr",
-        "uga": "STOP",
-        "ugc": "Cys",
-        "ugg": "Trp",
-        "ugu": "Cys",
-        "uuc": "Phe",
-        "uug": "Leu",
-        "uuu": "Phe",
-        "uua": "Leu",
-    }
-
     trans3 = []
     trans4 = []
     dna_split_list = find_met(dna)
@@ -228,8 +151,8 @@ def dna_to_amino_acid_chain(dna):
 
     # checking to see if a codon is not a STOP codon
     for i in range(0, len(dna_split_list)):
-        if rna_combos[dna_split_list[i]] != "STOP":
-            trans3.append(rna_combos[dna_split_list[i]])
+        if RNA_COMBOS[dna_split_list[i]] != "STOP":
+            trans3.append(RNA_COMBOS[dna_split_list[i]])
         else:
             break
 
@@ -239,7 +162,7 @@ def dna_to_amino_acid_chain(dna):
         if dna_split_list[i] == "aug":
             trans4.append("Met")
             for j in range(i + 1, len(dna_split_list)):
-                trans4.append(rna_combos[dna_split_list[j]])
+                trans4.append(RNA_COMBOS[dna_split_list[j]])
 
     # checking to see if there is a STOP codon in the second list, and if so,
     # deleted it and everything afterwards
