@@ -35,6 +35,6 @@ All updates since the initial posting of this program:
 - formatted the code to be read more easily
 - made instuctions more clear
 - added tests
-- cleaned up code even further
+- cleaned up code even further (linty)
 - adjustments to main() function
 - removed the dictionaries from the main code, into a seperate file "constants.py"
