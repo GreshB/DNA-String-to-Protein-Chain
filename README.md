@@ -37,3 +37,4 @@ All updates since the initial posting of this program:
 - added tests
 - cleaned up code even further
 - adjustments to main() function
+- removed the dictionaries from the main code, into a seperate file "constants.py"
