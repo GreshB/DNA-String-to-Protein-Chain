@@ -33,3 +33,6 @@ All updates since the initial posting of this program:
 - added descriptions to each function
 - added comments to if statements and loops to describe what their purposes are
 - formatted the code to be read more easily
+- made instuctions more clear
+- added tests
+- cleaned up code even further
