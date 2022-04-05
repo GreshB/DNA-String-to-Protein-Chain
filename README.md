@@ -36,3 +36,4 @@ All updates since the initial posting of this program:
 - made instuctions more clear
 - added tests
 - cleaned up code even further
+- adjustments to main() function
