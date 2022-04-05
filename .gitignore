@@ -1,0 +1,17 @@
+.DS_Store
+*.swp
+
+.idea
+.vscode/
+
+*.pyc
+*.pyo
+dist
+*.egg
+*.egg-info
+*.sqlite
+
+env
+venv
+*.env
+env*
