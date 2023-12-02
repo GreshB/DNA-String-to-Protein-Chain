@@ -5,14 +5,13 @@ If a dna strand that won't be able to create a protein chain is inputted, a mess
 
 Note: The DNA strand must be 5' to 3', i.e. the coding strand
 
-To start run `python File.py`
+To start run `python DNA_to_Protein.py`
 
 Success Example:
 ```
 $ python3 File.py gatgactgtaccaggattacatggtggtcgctaaaggatgcacaatatgcgctaaagtcg
 First Chain: Met-Thr-Val-Pro-Gly-Leu-His-Gly-Gly-Arg
 Second Chain: Met-His-Asn-Met-Arg
-None
 ```
 
 Failure Example:
