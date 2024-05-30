@@ -58,7 +58,7 @@ def frame_for_met(dna):
     Purpose: To frame the RNA sequence created from the DNA sequence in such a way
              that if "aug" is in the string, then a created list that has organized
              the RNA sequence into codons, ensures that "aug" will be one of its elements
-             will be returned. (Example: "caug" would become ["cau","g"] without framing,
+             that will be returned. (Example: "caug" would become ["cau","g"] without framing,
              so this function will instead alter it to ["c","aug"])
     Parameter(s): DNA: the inputted DNA sequence
     Return Values: dna_split_list: The RNA sequence in list form in which "aug" is an element,
